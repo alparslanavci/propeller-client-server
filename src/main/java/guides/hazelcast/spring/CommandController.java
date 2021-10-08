@@ -23,10 +23,11 @@ public class CommandController {
 
     @RequestMapping("/put")
     public String put(@RequestParam(value = "key") String key, @RequestParam(value = "value") String value) {
-        //"book-hotel:8080"
+        //"book-hotel:8080:/bank-transaction?quantity=-3"
         String[] split = value.split(":");
+        String path = split[2].substring(0, split[2].indexOf("?"));
         //"outbound|80||springboot-service.default.svc.cluster.local"
-        retrieveMap().put(key, "outbound|" + split[1] + "||" + split[0] + ".default.svc.cluster.local");
+        retrieveMap().put(key, "outbound|" + split[1] + "||" + split[0] + ".default.svc.cluster.local:" + path);
         return value;
     }
 

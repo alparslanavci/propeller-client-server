@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: hazelcast-client
+  name: propeller-app
 spec:
-  serviceName: hazelcast-client
+  serviceName: propeller-app
   replicas: 3
   selector:
     matchLabels:
-      app: hazelcast-client
+      app: propeller-app
   template:
     metadata:
       labels:
-        app: hazelcast-client
+        app: propeller-app
     spec:
       containers:
-        - name: hazelcast-client
+        - name: propeller-app
           image: alparslanavci/istio-client:2.0
           imagePullPolicy: Always
           ports:
@@ -30,11 +30,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-service
+  name: propeller-app
 spec:
   type: ClusterIP
   selector:
-    app: hazelcast-client
+    app: propeller-app
   ports:
     - protocol: TCP
       port: 80
